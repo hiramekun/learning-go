@@ -13,11 +13,11 @@ func main() {
 	totalWins["abc"] = 3
 	fmt.Println(totalWins["abc"]) // 3
 
-	teams := map[string][]string{
-		"ライターズ":       []string{"夏目", "森", "国木田"},
-		"ナイツ":           []string{"武田", "徳川", "明智"},
-		"ミュージシャンズ": []string{"ラベル", "ベートーベン", "リスト"},
-	}
+	//teams := map[string][]string{
+	//	"ライターズ":    []string{"夏目", "森", "国木田"},
+	//	"ナイツ":      []string{"武田", "徳川", "明智"},
+	//	"ミュージシャンズ": []string{"ラベル", "ベートーベン", "リスト"},
+	//}
 
-	ages := make(map[string]int, 10)
+	//ages := make(map[string]int, 10)
 }
