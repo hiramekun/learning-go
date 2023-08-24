@@ -19,4 +19,16 @@ func main() {
 	if intSet[10] {
 		fmt.Println("10が含まれている") // 出力される
 	}
+
+	intSet2 := map[int]struct{}{}
+	for _, v := range vals {
+		intSet2[v] = struct{}{}
+	}
+	if _, ok := intSet2[5]; ok {
+		fmt.Println("5が含まれている") // 出力される
+	}
+
+	if _, ok := intSet2[500]; ok {
+		fmt.Println("500が含まれている") // 出力されない
+	}
 }
