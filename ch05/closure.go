@@ -27,3 +27,9 @@ func main() {
 	fmt.Println("姓でソート")
 	fmt.Println(people)
 }
+
+func makeMult(base int) func(int) int {
+	return func(factor int) int {
+		return base * factor
+	}
+}
