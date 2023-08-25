@@ -14,11 +14,12 @@ func addTo(base int, vals ...int) []int {
 	return out
 }
 
-func divAndRemainder(numerator, denominator int) (int, int, error) {
+func divAndRemainder(numerator, denominator int) (result int, remainder int, err error) {
 	if denominator == 0 {
-		return 0, 0, errors.New("division by zero")
+		return numerator, denominator, errors.New("division by zero")
 	}
-	return numerator / denominator, numerator % denominator, nil
+	result, remainder = numerator/denominator, numerator%denominator
+	return result, remainder, nil
 }
 
 func main() {
