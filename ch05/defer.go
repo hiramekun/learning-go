@@ -31,6 +31,16 @@ func DoSomeInserts(ctx context.Context, db *sql.DB, value1, value2 string) (err 
 	return nil
 }
 
+func getFile(name string) (*os.File, func(), error) {
+	file, err := os.Open(name)
+	if err != nil {
+		return nil, nil, err
+	}
+	return file, func() {
+		file.Close()
+	}, err
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("ファイルが指定されていません")
