@@ -24,6 +24,27 @@ func (m Manager) FindNewEmployees() []Employee {
 	return newEmployees
 }
 
+type Inner struct {
+	A int
+}
+
+func (i Inner) IntPrinter(val int) string {
+	return fmt.Sprintf("Inner: %d", val)
+}
+
+func (i Inner) Double() string {
+	return i.IntPrinter(i.A * 2)
+}
+
+type Outer struct {
+	Inner
+	S string
+}
+
+func (o Outer) IntPrinter(val int) string {
+	return fmt.Sprintf("Outer: %d", val)
+}
+
 func main() {
 	m := Manager{
 		Employee: Employee{
@@ -44,4 +65,10 @@ func main() {
 	{豊臣秀吉 12345}
 	[{石田三成 13112} {徳川家康 13115}]
 	*/
+
+	o := Outer{
+		Inner: Inner{A: 10},
+		S:     "Hello",
+	}
+	fmt.Println(o.Double()) // Inner: 20
 }
