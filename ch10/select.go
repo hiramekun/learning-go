@@ -8,13 +8,17 @@ func main() {
 
 	go func() {
 		v := 1
-		ch1 <- v // ch1 からの読み込みを待つ
+		ch1 <- v
 		v2 := <-ch2
-		fmt.Println(v, v2)
+		fmt.Print("無名関数内: ", v, " ", v2, "\n")
 	}()
 	v := 2
-	ch2 <- v // ch2 からの読み込みを待つ
-	v2 := <-ch1
-	fmt.Println(v, v2)
-	// fatal error: all goroutines are asleep - deadlock!
+	var v2 int
+	select {
+	case ch2 <- v:
+	case v2 = <-ch1:
+	}
+	fmt.Print("mainの最後: ", v, " ", v2, "\n")
+
+	// mainの最後: 2 1
 }
