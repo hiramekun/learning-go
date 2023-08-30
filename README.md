@@ -3,4 +3,7 @@ learning golang
 
 [初めてのGo言語]([https://www.oreilly.co.jp/books/9784814400041/)のサンプルコードを写経します
 
-![](https://www.oreilly.co.jp/books/images/picture_large978-4-8144-0004-1.jpeg)
+提供されいてるサンプルコードは https://github.com/mushahiroyuki/lgo で参照できます。
+
+<img src="https://www.marlin-arms.com/jpn/arts/books-small/learning-go.png" width="200px">
+
