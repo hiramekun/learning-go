@@ -55,3 +55,24 @@ func TestFileLen(t *testing.T) {
 		t.Error("FileLen should be 65204, but got", result)
 	}
 }
+
+var blackhole int
+
+/*
+➜ go test -bench=. -benchmem
+goos: darwin
+goarch: arm64
+pkg: test_examples/bench
+BenchmarkFileLen1-10                  34          31781127 ns/op           65333 B/op      65208 allocs/op
+PASS
+ok      test_examples/bench     1.473s
+*/
+func BenchmarkFileLen1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		result, err := FileLen("testdata/data.txt", 1)
+		if err != nil {
+			b.Fatal(err)
+		}
+		blackhole = result
+	}
+}
