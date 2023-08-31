@@ -1,6 +1,7 @@
 package bench
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"testing"
@@ -74,5 +75,34 @@ func BenchmarkFileLen1(b *testing.B) {
 			b.Fatal(err)
 		}
 		blackhole = result
+	}
+}
+
+/*
+➜ go test -bench=. -benchmem
+goos: darwin
+goarch: arm64
+pkg: test_examples/bench
+BenchmarkFileLen1-10                  33          31028091 ns/op           65333 B/op      65208 allocs/op
+BenchmarkFileLen/FileLen1-10                  38          30989535 ns/op           65333 B/op      65208 allocs/op
+BenchmarkFileLen/FileLen10-10                375           3178990 ns/op          104480 B/op       6525 allocs/op
+BenchmarkFileLen/FileLen100-10              3457            335977 ns/op           73377 B/op        657 allocs/op
+BenchmarkFileLen/FileLen1000-10            23635             52555 ns/op           68736 B/op         70 allocs/op
+BenchmarkFileLen/FileLen10000-10           60751             20307 ns/op           82048 B/op         11 allocs/op
+BenchmarkFileLen/FileLen100000-10          53779             22461 ns/op          213121 B/op          5 allocs/op
+PASS
+ok      test_examples/bench     9.926s
+*/
+func BenchmarkFileLen(b *testing.B) {
+	for _, v := range []int{1, 10, 100, 1_000, 10_000, 100_000} {
+		b.Run(fmt.Sprintf("FileLen%d", v), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				result, err := FileLen("testdata/data.txt", v)
+				if err != nil {
+					b.Fatal(err)
+				}
+				blackhole = result
+			}
+		})
 	}
 }
